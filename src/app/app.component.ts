@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -13,18 +15,18 @@ export class AppComponent implements OnInit {
     keyword: 'demo123'
   };
 
-  articleDatas: any[];
+  data$: Observable<any[]>;
+
+  pageCountStart = 0;
+  pageCountEnd = 3;
 
   constructor(
-    private http: HttpClient
+    private dataSvc: DataService
   ) {
-
   }
 
   ngOnInit(): void {
-    this.http.get<any[]>('/api/articles.json',).subscribe(results => {
-      this.articleDatas = results;
-    });
+      this.data$ = this.dataSvc.loadArticles();
   }
 
   doSearch(value: string, elm?: HTMLInputElement) {
@@ -35,3 +37,4 @@ export class AppComponent implements OnInit {
   }
 
 }
+
