@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,12 +13,23 @@ export class AppComponent implements OnInit {
     keyword: 'demo123'
   };
 
-  ngOnInit(): void {
+  articleDatas: any[];
+
+  constructor(
+    private http: HttpClient
+  ) {
+
   }
 
-  doSearch(value: string, elm?: HTMLInputElement){
+  ngOnInit(): void {
+    this.http.get<any[]>('/api/articles.json',).subscribe(results => {
+      this.articleDatas = results;
+    });
+  }
+
+  doSearch(value: string, elm?: HTMLInputElement) {
     this.data.keyword = value;
-    if(elm && !value){
+    if (elm && !value) {
       elm.value = '';
     }
   }
