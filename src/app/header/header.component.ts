@@ -10,6 +10,8 @@ export class HeaderComponent implements OnInit {
   siteName = 'Hello, World';
   subTitle = 'will will';
 
+  counter = 10;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -20,5 +22,9 @@ export class HeaderComponent implements OnInit {
     if(event.shiftKey){
       this.siteName = 'The Will Will Web';
     }
+  }
+
+  changeFontSize(){
+    this.counter++;
   }
 }
