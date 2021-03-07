@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  siteName = 'Hello, World';
+  subTitle = 'will will';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  changeName(event: MouseEvent){
+    console.log(event);
+    if(event.shiftKey){
+      this.siteName = 'The Will Will Web';
+    }
+  }
 }
